@@ -9,7 +9,7 @@ tablet()
 mobile()
 }
 .content-wrap {
-  width: calc(100% - 260px);
+  width: calc(100% - 180px);
 tablet()
 mobile()
 }
@@ -1838,7 +1838,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #faff67;
+  background: #ff04e9;
 }
 .links-of-blogroll {
   font-size: 13px;
