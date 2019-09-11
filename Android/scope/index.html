@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="dagger2,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="坤哥的博客">
-<meta property="og:url" content="http://yoursite.com/tags/mpvue/index.html">
+<meta name="description" content="Scope中文意思是范围，Dagger2 中的@Singleton是 Scope 的一种默认实现，点进去可以看到： 1234@Scope@Documented@Retention(RUNTIME)public @interface Singleton &amp;#123;&amp;#125;  上面是 Java 方式，如果我们自定义一个 Scope 就很简单了（kotlin 语言）： 1234@Documente">
+<meta name="keywords" content="dagger2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dagger2 中的 Scope、dependencies">
+<meta property="og:url" content="http://yoursite.com/Android/scope/index.html">
 <meta property="og:site_name" content="坤哥的博客">
+<meta property="og:description" content="Scope中文意思是范围，Dagger2 中的@Singleton是 Scope 的一种默认实现，点进去可以看到： 1234@Scope@Documented@Retention(RUNTIME)public @interface Singleton &amp;#123;&amp;#125;  上面是 Java 方式，如果我们自定义一个 Scope 就很简单了（kotlin 语言）： 1234@Documente">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T09:21:44.999Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="坤哥的博客">
+<meta name="twitter:title" content="Dagger2 中的 Scope、dependencies">
+<meta name="twitter:description" content="Scope中文意思是范围，Dagger2 中的@Singleton是 Scope 的一种默认实现，点进去可以看到： 1234@Scope@Documented@Retention(RUNTIME)public @interface Singleton &amp;#123;&amp;#125;  上面是 Java 方式，如果我们自定义一个 Scope 就很简单了（kotlin 语言）： 1234@Documente">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/mpvue/">
+  <link rel="canonical" href="http://yoursite.com/Android/scope/">
 
 
 
 
 
-  <title>标签: mpvue | 坤哥的博客</title>
+  <title>Dagger2 中的 Scope、dependencies | 坤哥的博客</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -266,52 +271,301 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>mpvue<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Android/scope/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="坤哥">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/前端和小程序/mpvue01/" itemprop="url">
-              
-                <span itemprop="name">mpvue + Vant Weapp 开发小程序之 van-checkbox 和 van-checkbox-group</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Dagger2 中的 Scope、dependencies</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-11T10:34:14+08:00" content="2019-09-11">
-          09-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T09:25:46+08:00">
+                2019-07-19
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-24T17:21:44+08:00">
+                2019-07-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Android/scope/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Android/scope/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Android/scope/" class="leancloud_visitors" data-flag-title="Dagger2 中的 Scope、dependencies">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  691
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Scope</code>中文意思是<strong>范围</strong>，Dagger2 中的<code>@Singleton</code>是 Scope 的一种默认实现，点进去可以看到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Singleton &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是 Java 方式，如果我们自定义一个 Scope 就很简单了（kotlin 语言）：</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Scope</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">annotation</span> <span class="class"><span class="keyword">class</span> <span class="title">ZhuangBiScope</span></span></span><br></pre></td></tr></table></figure>
+
+<p>一个 Component 依赖另一个 Component 时需要用到 Scope，至于为什么 Component 之间要互相依赖，简单说下:一个项目里有很多功能模块，很多的 Activity，每个 Activity 都有对应的 Component，那么每个 Component 再对应多个 Module，最终工程会很庞大。有些 Module 可以共用，所以就需要<code>dependencies</code>关键字来依赖别的 Component。</p>
+<h4 id="比如-AnimalComponent-要依赖-BComponent"><a href="#比如-AnimalComponent-要依赖-BComponent" class="headerlink" title="比如 AnimalComponent 要依赖 BComponent"></a>比如 AnimalComponent 要依赖 BComponent</h4><p>AnimalComponent.kt</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ZhuangBiScope</span></span><br><span class="line"><span class="meta">@Component(dependencies = [(BComponent::class)</span>],modules = [(AppModule::<span class="class"><span class="keyword">class</span>), <span class="type"></span></span>(AnimalModule::<span class="class"><span class="keyword">class</span>)])</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">AnimalComponent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">inject</span><span class="params">(secondActivity: <span class="type">SecondActivity</span>)</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AnimalComponent 需要依赖 BComponent，则<code>@ZhuangBiScope</code>注解在 AnimalComponent 上面。另外，AnimalComponent 包含的 AppModule 和 AnimalModule 里面的<code>provideXX()</code>方法如果有使用 Scope 修饰的（如 Singleton、ZhuangBiScope），则 AnimalComponent 也要用同样的 Scope 注解。且包含在同一个 Component 下的不同 Module 中<code>provideXX()</code>必须使用相同的 Scope。</p>
+<p>AppModule.kt</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppModule</span></span>(<span class="keyword">var</span> myApp: Application) &#123;</span><br><span class="line">    <span class="meta">@Provides</span></span><br><span class="line">    <span class="meta">@ZhuangBiScope</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">providesApplication</span><span class="params">()</span></span>: Application = myApp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AnimalModule.kt</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimalModule</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Provides</span></span><br><span class="line">    <span class="meta">@ZhuangBiScope</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">providesDog</span><span class="params">()</span></span>: Dog &#123;</span><br><span class="line">        Log.e(<span class="string">"abc"</span>, <span class="string">"----- AnimalModule Dog -----"</span>)</span><br><span class="line">        <span class="keyword">return</span> Dog()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Provides</span></span><br><span class="line">    <span class="meta">@Tested(<span class="meta-string">"dog"</span>)</span></span><br><span class="line">    <span class="meta">@ZhuangBiScope</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">providesCat</span><span class="params">(dog: <span class="type">Dog</span>)</span></span>: Cat &#123;</span><br><span class="line">        Log.e(<span class="string">"abc"</span>, <span class="string">"----- AnimalModule Cat withdog -----"</span>)</span><br><span class="line">        <span class="keyword">return</span> Cat(dog)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Provides</span></span><br><span class="line">    <span class="meta">@Tested(<span class="meta-string">"dog2"</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">providesCat2</span><span class="params">(dog: <span class="type">Dog</span>)</span></span>: Cat &#123;</span><br><span class="line">        Log.e(<span class="string">"abc"</span>, <span class="string">"----- AnimalModule Cat withdog2 -----"</span>)</span><br><span class="line">        <span class="keyword">return</span> Cat(dog)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的 providesCat2() 方法没有任何 Scope 注解。<br>接下来我们看看 BComponent：</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="meta">@Component(modules = [(PersonModule::class)</span>, (StudentModule::<span class="class"><span class="keyword">class</span>)])</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">BComponent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">inject</span><span class="params">(bActivity: <span class="type">BActivity</span>)</span></span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">person</span><span class="params">()</span></span>: Person</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">provideStudent</span><span class="params">()</span></span>: Student</span><br><span class="line"><span class="comment">//    fun test(): String//会报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>包含两个 Module，一开始我只写了第一行的<code>fun inject(bActivity: BActivity)</code>结果总是报错，在这里卡了很久。<br>需要说明的是:</p>
+<ul>
+<li>当一个 Component 给别的 Component 依赖时，被依赖的 Component 要定义一些方法。这些方法的返回值类型和它包含的 Module 中方法返回类型相同。</li>
+<li>只有暴露的方法才能在依赖方的 Component 中使用。 </li>
+<li>所有的暴露给依赖方的方法都是无参的。</li>
+<li>不能有多余的自定义方法（例如上面的 test 方法），因为多余的在 Module 中找不到对应方法。</li>
+</ul>
+<p>举例说明，BComponent 包含 PersonModule 和 StudentModule，两者分别包含：</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="meta">@Provides</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">providePerson</span><span class="params">()</span></span>: Person = Person()</span><br><span class="line"></span><br><span class="line"><span class="meta">@Provides</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">provideStudent</span><span class="params">()</span></span>: Student = Student()</span><br></pre></td></tr></table></figure>
+
+<p>当 AnimalComponent 所 inject 的类中需要用到上面这两个实例的时候，就需要在 BComponent 中注册两个方法给 inject 的类使用(方法名叫什么都无所谓)：</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">person</span><span class="params">()</span></span>: Person</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">provideStudent</span><span class="params">()</span></span>: Student</span><br></pre></td></tr></table></figure>
+
+<p>这样才可以在 AnimalComponent 所 inject 的类中使用<code>@Inject</code>初始化 Person 和 Student 对象。</p>
+<hr>
+<p><strong>最后</strong><br><a href="https://github.com/Erlangshen/daggertest" target="_blank" rel="noopener">项目源码</a></p>
+<hr>
+<p>其他几篇的链接：<br><a href="http://liuergua.win/2019/07/19/subcomponent/" target="_blank" rel="noopener">Dagger2 中的 SubComponent</a><br><a href="http://liuergua.win/2019/07/19/qualifier/" target="_blank" rel="noopener">Dagger2 中的 Qualifier</a><br><a href="http://liuergua.win/2019/07/19/androidinjection/" target="_blank" rel="noopener">Dagger2 中使用 AndroidInjection 优化注入流程</a><br><a href="http://liuergua.win/2019/07/19/binds/" target="_blank" rel="noopener">Dagger2 中的 Binds、IntoSet、IntoMap</a></p>
+<hr>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dagger2/" rel="tag"># dagger2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android/qualifier/" rel="next" title="Dagger2 中的 Qualifier">
+                <i class="fa fa-chevron-left"></i> Dagger2 中的 Qualifier
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android/subcomponent/" rel="prev" title="Dagger2 中的 SubComponent">
+                Dagger2 中的 SubComponent <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -319,6 +573,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -339,8 +607,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -402,6 +679,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#比如-AnimalComponent-要依赖-BComponent"><span class="nav-number">1.</span> <span class="nav-text">比如 AnimalComponent 要依赖 BComponent</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -587,6 +880,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -604,6 +901,18 @@
       <script id="dsq-count-scr" src="https://刘二瓜.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/Android/scope/';
+          this.page.identifier = 'Android/scope/';
+          this.page.title = 'Dagger2 中的 Scope、dependencies';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://刘二瓜.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="dagger2,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="坤哥的博客">
-<meta property="og:url" content="http://yoursite.com/tags/mpvue/index.html">
+<meta name="description" content="每个 Activity 如果都需要手动inject(this)有点繁琐，com.google.dagger:dagger-android中包含AndroidInjection类可以优化注册。 1.在 BaseActivity 中注册123456abstract class BaseActivity:AppCompatActivity() &amp;#123;    override fun onCreat">
+<meta name="keywords" content="dagger2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dagger2 中使用 AndroidInjection 优化注入流程">
+<meta property="og:url" content="http://yoursite.com/Android/androidinjection/index.html">
 <meta property="og:site_name" content="坤哥的博客">
+<meta property="og:description" content="每个 Activity 如果都需要手动inject(this)有点繁琐，com.google.dagger:dagger-android中包含AndroidInjection类可以优化注册。 1.在 BaseActivity 中注册123456abstract class BaseActivity:AppCompatActivity() &amp;#123;    override fun onCreat">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T09:15:29.392Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="坤哥的博客">
+<meta name="twitter:title" content="Dagger2 中使用 AndroidInjection 优化注入流程">
+<meta name="twitter:description" content="每个 Activity 如果都需要手动inject(this)有点繁琐，com.google.dagger:dagger-android中包含AndroidInjection类可以优化注册。 1.在 BaseActivity 中注册123456abstract class BaseActivity:AppCompatActivity() &amp;#123;    override fun onCreat">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/mpvue/">
+  <link rel="canonical" href="http://yoursite.com/Android/androidinjection/">
 
 
 
 
 
-  <title>标签: mpvue | 坤哥的博客</title>
+  <title>Dagger2 中使用 AndroidInjection 优化注入流程 | 坤哥的博客</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -266,52 +271,309 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>mpvue<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Android/androidinjection/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="坤哥">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/前端和小程序/mpvue01/" itemprop="url">
-              
-                <span itemprop="name">mpvue + Vant Weapp 开发小程序之 van-checkbox 和 van-checkbox-group</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Dagger2 中使用 AndroidInjection 优化注入流程</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-11T10:34:14+08:00" content="2019-09-11">
-          09-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T09:26:32+08:00">
+                2019-07-19
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-24T17:15:29+08:00">
+                2019-07-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Android/androidinjection/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Android/androidinjection/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Android/androidinjection/" class="leancloud_visitors" data-flag-title="Dagger2 中使用 AndroidInjection 优化注入流程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  639
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>每个 Activity 如果都需要手动<code>inject(this)</code>有点繁琐，<code>com.google.dagger:dagger-android</code>中包含<code>AndroidInjection</code>类可以优化注册。</p>
+<h3 id="1-在-BaseActivity-中注册"><a href="#1-在-BaseActivity-中注册" class="headerlink" title="1.在 BaseActivity 中注册"></a>1.在 BaseActivity 中注册</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span>:<span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        AndroidInjection.inject(<span class="keyword">this</span>)</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意一定要在<code>super.onCreate(savedInstanceState)</code>之前。其他 Activity 继承 BaseActivity 即可。<br>同理，BaseFragment 也要这样操作，大同小异。这里以 v4 包的 Fragment 举例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseFragment</span>:<span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAttach</span><span class="params">(context: <span class="type">Context</span>?)</span></span> &#123;</span><br><span class="line">        AndroidSupportInjection.inject(<span class="keyword">this</span>)</span><br><span class="line">        <span class="keyword">super</span>.onAttach(context)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与 Activity 不同，这里在 onAttach 中注册。</p>
+<h3 id="2-创建-MainActivitySub"><a href="#2-创建-MainActivitySub" class="headerlink" title="2.创建 MainActivitySub"></a>2.创建 MainActivitySub</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Subcomponent(modules = [(StudentModule::class)</span>])</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MainActivitySub</span> : <span class="type">AndroidInjector</span>&lt;<span class="type">MainActivity</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Subcomponent</span>.Builder</span><br><span class="line">    <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span>:<span class="type">AndroidInjector.Builder</span>&lt;<span class="type">MainActivity</span>&gt;</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里多说几句，StudentModule 是 Student 类对应的 Module，Student 类需要注入 MainActivity，MainActivity 继承自 BaseActivity。这几个类简单就不贴了，详情见 <a href="https://github.com/Erlangshen/daggertest2" target="_blank" rel="noopener">源码</a>。<br>如果项目中有 Fragment，那么它对应的 Sub 接口这样写：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Subcomponent(modules = [(PersonModule::class)</span>])</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">TestFragmentSub</span>:<span class="type">AndroidInjector</span>&lt;<span class="type">TestFragment</span>&gt;</span>&#123;</span><br><span class="line">    <span class="meta">@Subcomponent</span>.Builder</span><br><span class="line">    <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span>:<span class="type">AndroidInjector.Builder</span>&lt;<span class="type">TestFragment</span>&gt;</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这两个接口都使用了 Builder 模式。</p>
+<h3 id="3-创建-ActivityModule"><a href="#3-创建-ActivityModule" class="headerlink" title="3.创建 ActivityModule"></a>3.创建 ActivityModule</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module(subcomponents = [(MainActivitySub::class)</span>])</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityModule</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Binds</span></span><br><span class="line">    <span class="meta">@IntoMap</span></span><br><span class="line">    <span class="meta">@ActivityKey(MainActivity::class)</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">bindMainActivity</span><span class="params">(builder: <span class="type">MainActivitySub</span>.<span class="type">Builder</span>)</span></span>: AndroidInjector.Factory&lt;<span class="keyword">out</span> Activity&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>所有 Activity 都要在 ActivityModule 中添加：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ActivityKey(XXXActivity::class)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>每个 Activity 都要建立对应的 XXXActivitySub 接口(上面第 2 步)，而且这些 XXXActivitySub 接口都要添加到 ActivityModule 的<code>subcomponents</code>中：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module(subcomponents = [(XXXActivitySub::class)</span>,(YYYActivitySub::<span class="class"><span class="keyword">class</span>)])</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>FragmentModule 也是一样的套路</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module(subcomponents = [(TestFragmentSub::class)</span>])</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">FragmentModule</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Binds</span></span><br><span class="line">    <span class="meta">@IntoMap</span></span><br><span class="line">    <span class="meta">@FragmentKey(TestFragment::class)</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">bindTestFragment</span><span class="params">(builder: <span class="type">TestFragmentSub</span>.<span class="type">Builder</span>)</span></span>: AndroidInjector.Factory&lt;<span class="keyword">out</span> Fragment&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-创建-ApplicationSub"><a href="#4-创建-ApplicationSub" class="headerlink" title="4.创建 ApplicationSub"></a>4.创建 ApplicationSub</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(modules = [(ActivityModule::class)</span>, (FragmentModule::<span class="class"><span class="keyword">class</span>)])</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ApplicationSub</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">inject</span><span class="params">(app: <span class="type">MyApp</span>)</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ApplicationSub 管理 ActivityModule 和 FragmentModule，而这两个类管理所有的 Activity 和 Fragment，这样，就只需要在 Application 中初始化就好了。</p>
+<h3 id="5-初始化"><a href="#5-初始化" class="headerlink" title="5.初始化"></a>5.初始化</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> : <span class="type">Application</span></span>(), HasActivityInjector, HasSupportFragmentInjector  &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> activityInjector: DispatchingAndroidInjector&lt;Activity&gt;</span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> fragmentInjector: DispatchingAndroidInjector&lt;Fragment&gt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line">        DaggerApplicationSub.create().inject(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">activityInjector</span><span class="params">()</span></span>: DispatchingAndroidInjector&lt;Activity&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> activityInjector</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">supportFragmentInjector</span><span class="params">()</span></span>: DispatchingAndroidInjector&lt;Fragment&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> fragmentInjector</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-其他说明"><a href="#6-其他说明" class="headerlink" title="6.其他说明"></a>6.其他说明</h3><ul>
+<li><p>我使用的开发环境是<code>gradle:3.1.2 + kotlin_version = &#39;1.2.30&#39;</code>,需要在 app.gradle 里面添加<code>apply plugin: &#39;kotlin-kapt&#39;</code></p>
+</li>
+<li><p>使用针对 Android 的 dagger 地址：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kapt <span class="string">'com.google.dagger:dagger-compiler:2.12'</span></span><br><span class="line">implementation <span class="string">'com.google.dagger:dagger-android:2.12'</span></span><br><span class="line">implementation <span class="string">'com.google.dagger:dagger-android-support:2.12'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Rebuild 的时候会提示如下红色日志，这个不影响，可以直接运行项目：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Folder D:\workspace\Dagger2Sample-master\app\build\generated\source\kaptKotlin\debug</span><br><span class="line"></span><br><span class="line">Folder D:\workspace\Dagger2Sample-master\app\build\generated\source\kaptKotlin\release</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>rd-party Gradle plug-ins may be the cause</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>最后，</strong><br><a href="https://github.com/Erlangshen/daggertest2" target="_blank" rel="noopener"><strong>源码地址</strong></a></p>
+<hr>
+<p>其他几篇的链接：<br><a href="http://liuergua.win/2019/07/19/qualifier/" target="_blank" rel="noopener">Dagger2 中的 Qualifier</a><br><a href="http://liuergua.win/2019/07/19/scope/" target="_blank" rel="noopener">Dagger2 中的 Scope、dependencies</a><br><a href="http://liuergua.win/2019/07/19/subcomponent/" target="_blank" rel="noopener">Dagger2 中的 SubComponent</a><br><a href="http://liuergua.win/2019/07/19/binds/" target="_blank" rel="noopener">Dagger2 中的 Binds、IntoSet、IntoMap</a></p>
+<hr>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dagger2/" rel="tag"># dagger2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android/binds/" rel="next" title="Dagger2 中的 Binds、IntoSet、IntoMap">
+                <i class="fa fa-chevron-left"></i> Dagger2 中的 Binds、IntoSet、IntoMap
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/恶搞/vjpu01/" rel="prev" title="潘宇拳打镇关西">
+                潘宇拳打镇关西 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -319,6 +581,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -339,8 +615,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -402,6 +687,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在-BaseActivity-中注册"><span class="nav-number">1.</span> <span class="nav-text">1.在 BaseActivity 中注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建-MainActivitySub"><span class="nav-number">2.</span> <span class="nav-text">2.创建 MainActivitySub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建-ActivityModule"><span class="nav-number">3.</span> <span class="nav-text">3.创建 ActivityModule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建-ApplicationSub"><span class="nav-number">4.</span> <span class="nav-text">4.创建 ApplicationSub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-初始化"><span class="nav-number">5.</span> <span class="nav-text">5.初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-其他说明"><span class="nav-number">6.</span> <span class="nav-text">6.其他说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -587,6 +888,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -604,6 +909,18 @@
       <script id="dsq-count-scr" src="https://刘二瓜.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/Android/androidinjection/';
+          this.page.identifier = 'Android/androidinjection/';
+          this.page.title = 'Dagger2 中使用 AndroidInjection 优化注入流程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://刘二瓜.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
