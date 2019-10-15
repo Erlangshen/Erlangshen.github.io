@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190930105316987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191009095610346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-15T05:07:55.629Z">
+<meta property="og:updated_time" content="2019-10-15T05:13:07.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rxjava2 和 Retrofit2 结合使用详解">
 <meta name="twitter:description" content="不讲 rxjava 和 retrofit 而是直接上手 2 了，因为 2 封装的更好用的更多。 1. 观察者模式常见的 button 点击事件为例，button 是被观察者，listener 是观察者，setOnClickListener 过程是订阅，有了订阅关系后在 button 被点击的时候，监听者 listener 就可以响应事件。   这里的button.setOnClickListene">
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T13:07:55+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T13:13:07+08:00">
                 2019-10-15
               </time>
             
@@ -585,40 +585,6 @@
 <tr>
 <td>AndroidSchedulers.mainThread()</td>
 <td align="right">Android 主线程</td>
-</tr>
-</tbody></table>
-<hr>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th align="right">111</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>aaa</td>
-<td align="right">bbb</td>
-</tr>
-<tr>
-<td>fff</td>
-<td align="right">ggg</td>
-</tr>
-</tbody></table>
-<hr>
-<table>
-<thead>
-<tr>
-<th align="center">线程名称</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">aaa</td>
-<td align="center">bbb</td>
-</tr>
-<tr>
-<td align="center">fff</td>
-<td align="center">ggg</td>
 </tr>
 </tbody></table>
 <h3 id="4-4-Disposable-和-CompositeDisposable"><a href="#4-4-Disposable-和-CompositeDisposable" class="headerlink" title="4.4 Disposable 和 CompositeDisposable"></a>4.4 Disposable 和 CompositeDisposable</h3><p>最后介绍一下这两个类，<code>Disposable</code>前文出现过，在 Observer 的 onSubscribe 函数中，有一个 Disposable 类型的参数：<code>override fun onSubscribe(d: Disposable) {}</code>，通过前面介绍我们知道，Observable 和 Observer 建立订阅关系时会调用 onSubscribe 方法，但是没有说这个参数的作用。  </p>
