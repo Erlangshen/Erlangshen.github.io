@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190930105316987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191009095610346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-15T04:56:07.641Z">
+<meta property="og:updated_time" content="2019-10-15T04:59:53.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rxjava2 和 Retrofit2 结合使用详解">
 <meta name="twitter:description" content="不讲 rxjava 和 retrofit 而是直接上手 2 了，因为 2 封装的更好用的更多。 1. 观察者模式常见的 button 点击事件为例，button 是被观察者，listener 是观察者，setOnClickListener 过程是订阅，有了订阅关系后在 button 被点击的时候，监听者 listener 就可以响应事件。   这里的button.setOnClickListene">
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T12:56:07+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T12:59:53+08:00">
                 2019-10-15
               </time>
             
@@ -558,7 +558,44 @@
 </ol>
 </blockquote>
 <p>所以每次调用<code>observeOn</code>就会切换线程，并且决定的是接下来的变换/响应的线程。多说一句，<strong>多次设置 subscribeOn，只有第一次生效</strong>。  </p>
-<p><strong>线程可选值</strong>：<br>线 程 名 称 | 说明<br>-|-<br>Schedulers.immediate() | 默认的 Scheduler,直接在当前线程运行，相当于不指定线程<br>Schedulers.newThread() | 启用新线程，并在新线程执行操作<br>Schedulers.io() |  I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler。行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程<br>Schedulers.computation() | 计算所使用的 Scheduler。这个计算指的是 CPU 密集型计算，即不会被 I/O 等操作限制性能的操作，例如图形的计算。这个 Scheduler 使用的固定的线程池，大小为 CPU 核数。不要把 I/O 操作放在 computation() 中，否则 I/O 操作的等待时间会浪费 CPU<br>AndroidSchedulers.mainThread() |  Android 主线程</p>
+<p><strong>线程可选值</strong>：<br>线 程 名 称 | 说明</p>
+<ul>
+<li>| -<br>Schedulers.immediate() | 默认的 Scheduler,直接在当前线程运行，相当于不指定线程<br>Schedulers.newThread() | 启用新线程，并在新线程执行操作<br>Schedulers.io() |  I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler。行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程<br>Schedulers.computation() | 计算所使用的 Scheduler。这个计算指的是 CPU 密集型计算，即不会被 I/O 等操作限制性能的操作，例如图形的计算。这个 Scheduler 使用的固定的线程池，大小为 CPU 核数。不要把 I/O 操作放在 computation() 中，否则 I/O 操作的等待时间会浪费 CPU<br>AndroidSchedulers.mainThread() |  Android 主线程</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th align="right">111</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>aaa</td>
+<td align="right">bbb</td>
+</tr>
+<tr>
+<td>fff</td>
+<td align="right">ggg</td>
+</tr>
+</tbody></table>
+<hr>
+<table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">111</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">aaa</td>
+<td align="center">bbb</td>
+</tr>
+<tr>
+<td align="center">fff</td>
+<td align="center">ggg</td>
+</tr>
+</tbody></table>
 <h3 id="4-4-Disposable-和-CompositeDisposable"><a href="#4-4-Disposable-和-CompositeDisposable" class="headerlink" title="4.4 Disposable 和 CompositeDisposable"></a>4.4 Disposable 和 CompositeDisposable</h3><p>最后介绍一下这两个类，<code>Disposable</code>前文出现过，在 Observer 的 onSubscribe 函数中，有一个 Disposable 类型的参数：<code>override fun onSubscribe(d: Disposable) {}</code>，通过前面介绍我们知道，Observable 和 Observer 建立订阅关系时会调用 onSubscribe 方法，但是没有说这个参数的作用。  </p>
 <h4 id="4-4-1-DisPosable"><a href="#4-4-1-DisPosable" class="headerlink" title="4.4.1 DisPosable"></a>4.4.1 DisPosable</h4><p>Disposable 的 dispose() 函数可以用来解除订阅，这样就不会收到 Observable 发射的事件：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dis ?= <span class="literal">null</span></span><br><span class="line"><span class="keyword">val</span> observable = Observable.fromIterable(mutableListOf(<span class="string">"Hello"</span>, <span class="string">"RxJava"</span>, <span class="string">"GoodBye"</span>))</span><br><span class="line">        <span class="keyword">val</span> observer = <span class="keyword">object</span> : Observer&lt;String&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSubscribe</span><span class="params">(d: <span class="type">Disposable</span>)</span></span> &#123;</span><br><span class="line">                dis=d</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onSubscribe-----<span class="variable">$d</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNext</span><span class="params">(t: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (t==<span class="string">"Hello"</span>) dis.dispose()</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onError</span><span class="params">(e: <span class="type">Throwable</span>)</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">observable.subscribe(observer)</span><br><span class="line"><span class="comment">// log 打印</span></span><br><span class="line">-----onNext-----Hello</span><br></pre></td></tr></table></figure>
