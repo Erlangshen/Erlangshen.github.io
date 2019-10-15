@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="rxjava,retrofit,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="不讲 rxjava 和 retrofit 而是直接上手 2 了，因为 2 封装的更好用的更多。 1. 观察者模式常见的 button 点击事件为例，button 是被观察者，listener 是观察者，setOnClickListener 过程是订阅，有了订阅关系后在 button 被点击的时候，监听者 listener 就可以响应事件。   这里的button.setOnClickListene">
+<meta name="keywords" content="rxjava,retrofit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjava2 和 Retrofit2 结合使用详解">
+<meta property="og:url" content="http://yoursite.com/Android/retrofitandrxjava/index.html">
+<meta property="og:site_name" content="坤哥的博客">
+<meta property="og:description" content="不讲 rxjava 和 retrofit 而是直接上手 2 了，因为 2 封装的更好用的更多。 1. 观察者模式常见的 button 点击事件为例，button 是被观察者，listener 是观察者，setOnClickListener 过程是订阅，有了订阅关系后在 button 被点击的时候，监听者 listener 就可以响应事件。   这里的button.setOnClickListene">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190930105316987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191009095610346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-15T04:47:47.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjava2 和 Retrofit2 结合使用详解">
+<meta name="twitter:description" content="不讲 rxjava 和 retrofit 而是直接上手 2 了，因为 2 封装的更好用的更多。 1. 观察者模式常见的 button 点击事件为例，button 是被观察者，listener 是观察者，setOnClickListener 过程是订阅，有了订阅关系后在 button 被点击的时候，监听者 listener 就可以响应事件。   这里的button.setOnClickListene">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190930105316987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/Android/retrofitandrxjava/">
+
+
+
+
+
+  <title>Rxjava2 和 Retrofit2 结合使用详解 | 坤哥的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">坤哥的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Android/retrofitandrxjava/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="坤哥">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Rxjava2 和 Retrofit2 结合使用详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-15T12:45:05+08:00">
+                2019-10-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T12:47:47+08:00">
+                2019-10-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Android/retrofitandrxjava/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Android/retrofitandrxjava/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Android/retrofitandrxjava/" class="leancloud_visitors" data-flag-title="Rxjava2 和 Retrofit2 结合使用详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>不讲 rxjava 和 retrofit 而是直接上手 2 了，因为 2 封装的更好用的更多。</p>
+<h2 id="1-观察者模式"><a href="#1-观察者模式" class="headerlink" title="1. 观察者模式"></a>1. 观察者模式</h2><p>常见的 button 点击事件为例，button 是<strong>被观察者</strong>，listener 是<strong>观察者</strong>，setOnClickListener 过程是<strong>订阅</strong>，有了订阅关系后在 button 被点击的时候，监听者 listener 就可以响应事件。  </p>
+<p>这里的<code>button.setOnClickListener(listener)</code>看上去意思是被观察者订阅了观察者（杂志订阅了读者），逻辑上不符合日常生活习惯。其实这是设计模式的习惯，不必纠结，习惯了这种模式就利于理解观察者模式了。  </p>
+<h2 id="2-RxJava-中的观察者模式"><a href="#2-RxJava-中的观察者模式" class="headerlink" title="2. RxJava 中的观察者模式"></a>2. RxJava 中的观察者模式</h2><ul>
+<li><code>Observable</code>：被观察者（ble 结尾的单词一般表示 可…的，可观察的）</li>
+<li><code>Observer</code>：观察者（er 结尾的单词一般表示 …者，…人）</li>
+<li><code>subscribe</code>：订阅  </li>
+</ul>
+<p>首先创建 Observable 和 Observer，然后 <code>observable.subscribe(observer)</code>，这样 Observable 发出的事件就会被 Observer 响应。一般我们不手动创建 Observable，而是由 Retrofit 返回给我们，我们拿到 Observable 之后只需关心如何操作 Observer 中的数据即可。<br>不过为了由浅入深的演示，还是手动创建 Observable 来讲解。</p>
+<h3 id="2-1-创建-Observable"><a href="#2-1-创建-Observable" class="headerlink" title="2.1 创建 Observable"></a>2.1 创建 Observable</h3><p>常见的几种方式，不常用的不写了，因为我觉得这个模块不是重点。</p>
+<ul>
+<li><code>var observable=Observable.create(ObservableOnSubscribe&lt;String&gt; {...})</code></li>
+<li><code>var observable=Observable.just(...)</code></li>
+<li><code>var observable = Observable.fromIterable(mutableListOf(...))</code>  </li>
+</ul>
+<h4 id="2-1-1-create"><a href="#2-1-1-create" class="headerlink" title="2.1.1 create()"></a>2.1.1 create()</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observable2=Observable.create(<span class="keyword">object</span> :ObservableOnSubscribe&lt;String&gt;&#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">subscribe</span><span class="params">(emitter: <span class="type">ObservableEmitter</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">                emitter.onNext(<span class="string">"Hello "</span>)</span><br><span class="line">                emitter.onNext(<span class="string">"RxJava "</span>)</span><br><span class="line">                emitter.onNext(<span class="string">"GoodBye "</span>)</span><br><span class="line">                emitter.onComplete()            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>ObservableOnSubscribe</code>和<code>ObservableEmitter</code>都是陌生人，这个要是详细讲涉及到源码分析，东西可就多了（主要是我不熟悉），所以可以理解成 ObservableOnSubscribe 是用来帮助创建 Observable 的，ObservableEmitter 是用来发出事件的（这些事件在观察者 Observer 中可以响应处理）。<br>emitter 一次发射了三个事件，然后调用了 onComplete() 这些在下面讲观察者 Observer 时还会提到，一并讲解。</p>
+<h4 id="2-1-2-just"><a href="#2-1-2-just" class="headerlink" title="2.1.2 just"></a>2.1.2 just</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observable=Observable.just(<span class="string">"Hello"</span>,<span class="string">"RxJava"</span>,<span class="string">"GoodBye"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这句的效果等同于上面用 create 创建 observable，即 调用 3 次 onNext 后再调 onComplete。</p>
+<h4 id="2-1-3-fromIterable"><a href="#2-1-3-fromIterable" class="headerlink" title="2.1.3 fromIterable"></a>2.1.3 fromIterable</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observable = Observable.fromIterable(mutableListOf(<span class="string">"Hello"</span>,<span class="string">"RxJava"</span>,<span class="string">"GoodBye"</span>))</span><br></pre></td></tr></table></figure>
+
+<p>这句的效果等同于上面用 create 创建 observable，即 调用 3 次 onNext 后再调 onComplete。</p>
+<h3 id="2-2-创建-Observer"><a href="#2-2-创建-Observer" class="headerlink" title="2.2 创建 Observer"></a>2.2 创建 Observer</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> observer = <span class="keyword">object</span> : Observer&lt;String&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onComplete-----"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSubscribe</span><span class="params">(d: <span class="type">Disposable</span>)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onSubscribe-----"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNext</span><span class="params">(t: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onError</span><span class="params">(e: <span class="type">Throwable</span>)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onError-----<span class="variable">$e</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//订阅</span></span><br><span class="line">observable.subscribe(observer)</span><br></pre></td></tr></table></figure>
+
+<p>log 打印情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-----onSubscribe-----</span><br><span class="line">-----onNext-----Hello</span><br><span class="line">-----onNext-----RxJava</span><br><span class="line">-----onNext-----GoodBye</span><br><span class="line">-----onComplete-----</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，先是建立订阅关系，然后根据前面 observable 的发射顺序来打印 onNext，参数通过 onNext(t: String) 传进来，最后调用 onComplete，多说一句，在 just 和 fromIterable 的情况下，没有手动调用 Emitter，但是仍会先调用 onNext，最后调用 onComplete</p>
+<h3 id="2-3-Consumer-和-Action"><a href="#2-3-Consumer-和-Action" class="headerlink" title="2.3 Consumer 和 Action"></a>2.3 Consumer 和 Action</h3><p>这两个词意思分别是消费者（可以理解为消费被观察者发射出来的事件）和行为（可以理解为响应被观察者的行为）。对于 Observer 中的 4 个回调方法，我们未必都能用得到，如果只需要用到其中的一部分，就需要 Consumer 和 Action 上场了。  </p>
+<p>有参数的<code>onSubscribe</code>、<code>onNext</code>、<code>onError</code>我们用 Consumer 来代替，无参的<code>onComplete</code>用 Action 代替：</p>
+<h4 id="2-3-1-subscribe-Consumer-lt-super-T-gt-onNext"><a href="#2-3-1-subscribe-Consumer-lt-super-T-gt-onNext" class="headerlink" title="2.3.1 subscribe(Consumer&lt;? super T&gt; onNext)"></a>2.3.1 subscribe(Consumer&lt;? super T&gt; onNext)</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">observable.subscribe(<span class="keyword">object</span> :Consumer&lt;String&gt;&#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"><span class="comment">//打印</span></span><br><span class="line">-----onNext-----Hello</span><br><span class="line">-----onNext-----RxJava</span><br><span class="line">-----onNext-----GoodBye</span><br></pre></td></tr></table></figure>
+
+<p>说明一下，如果 subscribe 中我们只传一个对象参数，那只能是<code>subscribe(Consumer&lt;? super T&gt; onNext)</code>（onNext 方法），不能是 Action 或 Consumer&lt;? super Throwable&gt; onError、Consumer&lt;? super Disposable&gt; onSubscribe</p>
+<blockquote>
+<p>==注意==：Consumer 中的回调方法名称是 accept，区别于前面的 onNext</p>
+</blockquote>
+<h4 id="2-3-2-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError"><a href="#2-3-2-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError" class="headerlink" title="2.3.2 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError)"></a>2.3.2 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError)</h4><p>带有两个 Consumer 参数，分别负责 onNext 和 onError 的回调。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">observable.subscribe(<span class="keyword">object</span> : Consumer&lt;String&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="keyword">object</span> : Consumer&lt;Throwable&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">Throwable</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onError-----<span class="variable">$e</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果想要一个带有两个 Consumer 但是不是这种搭配（比如<code>subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Disposable&gt; onSubscribe)</code>），可以吗？答案是：<strong>不行</strong></p>
+<h4 id="2-3-3-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError-Action-onComplete"><a href="#2-3-3-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError-Action-onComplete" class="headerlink" title="2.3.3 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError,Action onComplete)"></a>2.3.3 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError,Action onComplete)</h4><p>带有三个参数，分别负责onNext、onError和onComplete的回调。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">observable.subscribe(<span class="keyword">object</span> : Consumer&lt;String&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="keyword">object</span> : Consumer&lt;Throwable&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">Throwable</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onError-----<span class="variable">$e</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="keyword">object</span> : Action &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onComplete-----"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>同样，三个参数只能有这一种搭配</p>
+<blockquote>
+<p>==注意==：Action 中的回调方法名称是 run，区别于前面的 onComplete</p>
+</blockquote>
+<h4 id="2-3-4-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError-Action-onComplete-Consumer-lt-super-Disposable-gt-onSubscribe"><a href="#2-3-4-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError-Action-onComplete-Consumer-lt-super-Disposable-gt-onSubscribe" class="headerlink" title="2.3.4 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError,Action onComplete, Consumer&lt;? super Disposable&gt; onSubscribe)"></a>2.3.4 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError,Action onComplete, Consumer&lt;? super Disposable&gt; onSubscribe)</h4><p>这种情况和直接 new 出来的 Observer 效果一样。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">observable2.subscribe(<span class="keyword">object</span> : Consumer&lt;String&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="keyword">object</span> : Consumer&lt;Throwable&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">Throwable</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onError-----<span class="variable">$e</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="keyword">object</span> : Action &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onComplete-----"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="keyword">object</span> : Consumer&lt;Disposable&gt;&#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">Disposable</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onSubscribe-----"</span>)            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-变换"><a href="#3-变换" class="headerlink" title="3. 变换"></a>3. 变换</h2><p>在上面的例子中，Observable 发送的都是 String 类型的数据，所以在 Observer 中接收的也都是 String，现实开发中的数据多种多样，而且有时候 Observable 提供的数据不是我们理想的情况，这种情况下就需要用到转换操作符。<br>同样我们只讲常用的：</p>
+<h3 id="3-1-map"><a href="#3-1-map" class="headerlink" title="3.1 map"></a>3.1 map</h3><p>比如我们想把上游的 Int 类型的数据转换成 String 可以这样操作：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable.fromIterable(mutableListOf&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>))</span><br><span class="line">                .map(<span class="keyword">object</span> : Function&lt;<span class="built_in">Int</span>, String&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">Int</span>)</span></span>: String &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="string">"zb<span class="variable">$t</span>"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .subscribe(<span class="keyword">object</span> : Consumer&lt;String&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">                        Log.e(<span class="string">"abc"</span>,<span class="string">"-- <span class="variable">$t</span> --"</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line"><span class="comment">//Log日志</span></span><br><span class="line">-- zb1 --</span><br><span class="line">-- zb3 --</span><br><span class="line">-- zb5 --</span><br><span class="line">-- zb7 --</span><br><span class="line">-- zb8 --</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>map</code>操作符，Int 类型数据，到 Consumer 里已经成了 String（这里为了简单的只看数据就没用 Observer 而改用 Consumer，两者都可以）。这里面用到了<code>Function</code>，它的第一个泛型是 Observable 中发射的数据类型，第二个泛型是我们想要装换之后的数据类型，在 Function 的 apply 方法中手动完成数据的转化。<br><strong>示意图</strong>：map 把圆的变成了方的。<br><img src="https://img-blog.csdnimg.cn/20190930105316987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70" alt="map">  </p>
+<h3 id="3-2-flatMap"><a href="#3-2-flatMap" class="headerlink" title="3.2 flatMap"></a>3.2 flatMap</h3><p>与 map 相似，不过 flatMap 返回的是一个 Observable，也就是说 Function 的第二个泛型固定了，就是 Observable，这样说不太好理解，看个例子：<br>假如现在有多个学生，每个学生有多个科目，每个科目考了多次试，现在要打印所有的分数。单单只用 map 就不能直接搞定，试试吧</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Course</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> scores: MutableList&lt;<span class="built_in">Int</span>&gt;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> courses: MutableList&lt;Course&gt;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> stu1Course1 = Course(<span class="string">"体育"</span>,mutableListOf(<span class="number">80</span>, <span class="number">81</span>, <span class="number">82</span>))</span><br><span class="line"><span class="keyword">var</span> stu1Course2 = Course(<span class="string">"美术"</span>,mutableListOf(<span class="number">63</span>, <span class="number">62</span>, <span class="number">60</span>))</span><br><span class="line"><span class="keyword">var</span> stu1 = Student(<span class="string">"StuA"</span>, mutableListOf(stu1Course1, stu1Course2))</span><br><span class="line"><span class="keyword">var</span> stu2Course1 = Course(<span class="string">"音乐"</span>,mutableListOf(<span class="number">74</span>, <span class="number">77</span>, <span class="number">79</span>))</span><br><span class="line"><span class="keyword">var</span> stu2Course2 = Course(<span class="string">"希腊语"</span>,mutableListOf(<span class="number">90</span>, <span class="number">90</span>, <span class="number">91</span>))</span><br><span class="line"><span class="keyword">var</span> stu2 = Student(<span class="string">"StuB"</span>, mutableListOf(stu2Course1, stu2Course2))</span><br><span class="line"></span><br><span class="line">Observable.just(stu1,stu2)</span><br><span class="line">                .map(<span class="keyword">object</span> :Function&lt;Student,MutableList&lt;Course&gt;&gt;&#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">Student</span>)</span></span>: MutableList&lt;Course&gt; &#123;</span><br><span class="line">                        <span class="keyword">return</span> t.courses</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .subscribe(<span class="keyword">object</span> :Consumer&lt;MutableList&lt;Course&gt;&gt;&#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">MutableList</span>&lt;<span class="type">Course</span>&gt;?)</span></span> &#123;</span><br><span class="line">                        <span class="keyword">for</span> (item <span class="keyword">in</span> t!!)&#123;</span><br><span class="line">                            <span class="keyword">for</span> (i <span class="keyword">in</span> item.scores)&#123;</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>,<span class="string">"---&gt;<span class="variable">$i</span>"</span>)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过两层 for 循环可以打印，这也是没办法的事，因为在 map 里面只能拿到 Course 集合。使用 flatMap 的情况是这样的：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(stu1, stu2)</span><br><span class="line">                .flatMap(<span class="keyword">object</span> : Function&lt;Student, ObservableSource&lt;Course&gt;&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">Student</span>)</span></span>: ObservableSource&lt;Course&gt; &#123;</span><br><span class="line">                        <span class="keyword">return</span> Observable.fromIterable(t.courses)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .flatMap(<span class="keyword">object</span> : Function&lt;Course, ObservableSource&lt;<span class="built_in">Int</span>&gt;&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">Course</span>)</span></span>: ObservableSource&lt;<span class="built_in">Int</span>&gt; &#123;</span><br><span class="line">                        <span class="keyword">return</span> Observable.fromIterable(t.scores)</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;)</span><br><span class="line">                .subscribe(<span class="keyword">object</span> : Consumer&lt;<span class="built_in">Int</span>&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">Int</span>?)</span></span> &#123;</span><br><span class="line">                        Log.e(<span class="string">"abc"</span>, <span class="string">"---&gt; <span class="variable">$t</span>"</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line"><span class="comment">// log 打印</span></span><br><span class="line">    ---&gt; <span class="number">80</span></span><br><span class="line">    ---&gt; <span class="number">81</span></span><br><span class="line">    ---&gt; <span class="number">82</span></span><br><span class="line">    ---&gt; <span class="number">63</span></span><br><span class="line">    ---&gt; <span class="number">62</span></span><br><span class="line">    ---&gt; <span class="number">60</span></span><br><span class="line">    ---&gt; <span class="number">74</span></span><br><span class="line">    ---&gt; <span class="number">77</span></span><br><span class="line">    ---&gt; <span class="number">79</span></span><br><span class="line">    ---&gt; <span class="number">90</span></span><br><span class="line">    ---&gt; <span class="number">90</span></span><br><span class="line">    ---&gt; <span class="number">91</span></span><br></pre></td></tr></table></figure>
+
+<p>用了两次 flatMap，链式调用比缩进式更清晰。这里面的 flatMap 返回值类型的是 ObservableSource 并不是我们在前面提到的 Observable，查看 Observable 源码可以看到，它继承了 ObservableSource，所以这种多态用法是可以的。<br>另外在 apply 中返回的<code>Observable.fromIterable(t.courses)</code>这一句不就是我们创建 Observable 的方式吗？<br>简单的说，map 是把 Observable 发射的数据变换一下类型，flatMap 是把数据中集合/数组中的每个元素再次通过 Observable 发射。<br><strong>示意图</strong>：faltMap 把一系列圆的通过一系列的 Observable 变成了一系列方的。<br><img src="https://img-blog.csdnimg.cn/20191009095610346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xrXzEyMzQ1Ng==,size_16,color_FFFFFF,t_70" alt="flatMap">     </p>
+<p>图虽然画的丑，但是我想意思比较明白了。  </p>
+<h3 id="3-3-filter"><a href="#3-3-filter" class="headerlink" title="3.3 filter"></a>3.3 filter</h3><p><code>filter</code>是过滤的意思，通过判断是否符合我们想要的逻辑，来决定是否发射事件，只有返回 true 的事件才被发射，其他的被抛弃。还以上面的例子为例，假如我们只想看 80 分以上的成绩可以这样过滤：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(stu1, stu2)</span><br><span class="line">                .flatMap(<span class="keyword">object</span> : Function&lt;Student, ObservableSource&lt;Course&gt;&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">Student</span>)</span></span>: ObservableSource&lt;Course&gt; &#123;</span><br><span class="line">                        <span class="keyword">return</span> Observable.fromIterable(t.courses)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .flatMap(<span class="keyword">object</span> : Function&lt;Course, ObservableSource&lt;<span class="built_in">Int</span>&gt;&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">Course</span>)</span></span>: ObservableSource&lt;<span class="built_in">Int</span>&gt; &#123;</span><br><span class="line">                        <span class="keyword">return</span> Observable.fromIterable(t.scores)</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;)</span><br><span class="line">                .filter(<span class="keyword">object</span> :Predicate&lt;<span class="built_in">Int</span>&gt;&#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">test</span><span class="params">(t: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> t &gt; <span class="number">80</span></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;)</span><br><span class="line">                .subscribe(<span class="keyword">object</span> : Consumer&lt;<span class="built_in">Int</span>&gt; &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">Int</span>?)</span></span> &#123;</span><br><span class="line">                        Log.e(<span class="string">"abc"</span>, <span class="string">"---&gt; <span class="variable">$t</span>"</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line"><span class="comment">// log 打印</span></span><br><span class="line">    ---&gt; <span class="number">81</span></span><br><span class="line">    ---&gt; <span class="number">82</span></span><br><span class="line">    ---&gt; <span class="number">90</span></span><br><span class="line">    ---&gt; <span class="number">90</span></span><br><span class="line">    ---&gt; <span class="number">91</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，filter 里面不是用 Function 了，而是 Predicate，这个单词是“基于…”的意思，基于 t &gt; 80，也就是选择大于 80 分的成绩。</p>
+<h2 id="4-结合-Retrofit-使用"><a href="#4-结合-Retrofit-使用" class="headerlink" title="4. 结合 Retrofit 使用"></a>4. 结合 Retrofit 使用</h2><p>前面 3 小节讲了很多，都是为了讲清楚 RxJava 的整个工作流程，还没涉及到<strong>线程切换</strong>。现实开发中更多的时候 Observable 是通过 Retrofit 返回给我们的。Retrofit 是一个网络请求框架，它基于 OkHttp3，做了更好的封装，结合 RxJava 用惯了的话可以大大提到开发效率。还是一样，我们只看怎么用，不涉及源码解读。</p>
+<h3 id="4-1-Retrofit-进行简单的-Get-请求"><a href="#4-1-Retrofit-进行简单的-Get-请求" class="headerlink" title="4.1 Retrofit 进行简单的 Get 请求"></a>4.1 Retrofit 进行简单的 Get 请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.squareup.retrofit2:retrofit:2.6.2&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:converter-gson:2.6.2&apos;</span><br></pre></td></tr></table></figure>
+
+<p>先引入依赖，然后我们请求一个知乎日报的新闻数据(点击查看数据：<a href="https://news-at.zhihu.com/api/4/news/latest)：" target="_blank" rel="noopener">https://news-at.zhihu.com/api/4/news/latest)：</a></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZhEntity</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZhEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date: String? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">var</span> stories: MutableList&lt;StoriesBean&gt;? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">var</span> top_stories: MutableList&lt;TopStoriesBean&gt;? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">StoriesBean</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> image_hue: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> title: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> url: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> hint: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> ga_prefix: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> type: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">var</span> id: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">var</span> images: MutableList&lt;String&gt;? = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TopStoriesBean</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> image_hue: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> hint: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> url: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> image: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> title: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> ga_prefix: String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> type: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">var</span> id: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ApiService</span></span><br><span class="line"><span class="keyword">import</span> retrofit2.Call</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.GET</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.Url</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ApiService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GET(<span class="meta-string">"news/latest"</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getLatestNews</span><span class="params">()</span></span>: Call&lt;ZhEntity&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="keyword">val</span> retrofit = Retrofit.Builder()</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                .baseUrl(<span class="string">"https://news-at.zhihu.com/api/4/"</span>)</span><br><span class="line">                .build()</span><br><span class="line">        <span class="keyword">val</span> service: ApiService = retrofit.create(ApiService::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>)</span></span><br><span class="line">        <span class="keyword">val</span> call: Call&lt;ZhEntity&gt; = service.getLatestNews()</span><br><span class="line">        call.enqueue(<span class="keyword">object</span> : Callback&lt;ZhEntity&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onFailure</span><span class="params">(call: <span class="type">Call</span>&lt;<span class="type">ZhEntity</span>&gt;?, t: <span class="type">Throwable</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"--&gt; <span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResponse</span><span class="params">(call: <span class="type">Call</span>&lt;<span class="type">ZhEntity</span>&gt;?, response: <span class="type">Response</span>&lt;<span class="type">ZhEntity</span>&gt;?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"--&gt;<span class="subst">$&#123;Gson().toJson(response?.body())&#125;</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>代码有点多，分别解释一下，ZhEntity 是实体类，ApiService 是一个接口，里面用注解的方式定义了一个方法 getLatestNews，<code>@GET</code>表示 Get 请求，由此可以想象肯定有<code>@POST</code>，<code>@GET</code>里面还有参数，这是请求地址 BaseUrl 后面的子文件夹。    </p>
+<p>getLatestNews 函数返回类型是 Call，这个是 Retrofit 定义用来请求网络的。<br>第三段代码，现实创建了一个 Retrofit 对象，<code>addConverterFactory(GsonConverterFactory.create())</code>是把接口返回的 json 类型的数据转换成实体类的类型，这个东西在<code>implementation &#39;com.squareup.retrofit2:converter-gson:2.6.2&#39;</code>时被引入。    </p>
+<p>然后是一系列的 Call 调用 qnqueue 操作什么的，看得出，没有用 Rxjava 一样可以完成网络请求，而且代码不复杂，好了，本文到此结束。   </p>
+<p>好吧，我在扯淡。继续讲，有人说不喜欢 url 被截成两段，可以这样修改，效果完全相同：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ApiService</span></span><br><span class="line"><span class="keyword">import</span> retrofit2.Call</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.GET</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.Url</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ApiService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GET</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getLatestNews</span><span class="params">(<span class="meta">@Url</span> url:<span class="type">String</span>)</span></span>: Call&lt;ZhEntity&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="keyword">val</span> retrofit = Retrofit.Builder()</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                .baseUrl(<span class="string">"https://www.baidu.com"</span>)</span><br><span class="line">                .build()</span><br><span class="line">        <span class="keyword">val</span> service: ApiService = retrofit.create(ApiService::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>)</span></span><br><span class="line">        <span class="keyword">val</span> call: Call&lt;ZhEntity&gt; = service.getLatestNews(<span class="string">"https://news-at.zhihu.com/api/4/news/latest"</span>)</span><br><span class="line">        call.enqueue(<span class="keyword">object</span> : Callback&lt;ZhEntity&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onFailure</span><span class="params">(call: <span class="type">Call</span>&lt;<span class="type">ZhEntity</span>&gt;?, t: <span class="type">Throwable</span>?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"--&gt; <span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResponse</span><span class="params">(call: <span class="type">Call</span>&lt;<span class="type">ZhEntity</span>&gt;?, response: <span class="type">Response</span>&lt;<span class="type">ZhEntity</span>&gt;?)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"--&gt;<span class="subst">$&#123;Gson().toJson(response?.body())&#125;</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>baseUrl 还是要的，不过设置成其他值无所谓了，因为不会被请求。  </p>
+</blockquote>
+<h3 id="4-2-Retrofit-结合-RxJava"><a href="#4-2-Retrofit-结合-RxJava" class="headerlink" title="4.2 Retrofit 结合 RxJava"></a>4.2 Retrofit 结合 RxJava</h3><p>啰嗦了这么多，才讲到这里。抱歉水平有限，没办法用简单的语言说清复杂的问题。<br>首先，引入依赖时多加一句对 RxJava 的支持：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.squareup.retrofit2:retrofit:2.6.2&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:converter-gson:2.6.2&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:adapter-rxjava2:2.6.2&apos;</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们的 getLatestNews 就可以直接返回一个 Observable 了！</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.reactivex.Observable</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.GET</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ApiService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GET(<span class="meta-string">"news/latest"</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getLatestNews</span><span class="params">()</span></span>: Observable&lt;ZhEntity&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>放心写，不会报错，有了 Observable，就好办了，轻车熟路：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> retrofit = Retrofit.Builder()</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</span><br><span class="line">                .baseUrl(<span class="string">"https://news-at.zhihu.com/api/4/"</span>)</span><br><span class="line">                .build()</span><br><span class="line">        <span class="keyword">val</span> service: ApiService = retrofit.create(ApiService::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>)</span></span><br><span class="line">        <span class="keyword">val</span> observable = service.getLatestNews()</span><br><span class="line">        observable.subscribeOn(Schedulers.newThread())</span><br><span class="line">                .subscribe(<span class="keyword">object</span> : Observer&lt;ZhEntity&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSubscribe</span><span class="params">(d: <span class="type">Disposable</span>)</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNext</span><span class="params">(t: <span class="type">ZhEntity</span>)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>,<span class="string">"--&gt;<span class="subst">$&#123;Gson().toJson(t)&#125;</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onError</span><span class="params">(e: <span class="type">Throwable</span>)</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>,<span class="string">"--&gt;<span class="variable">$e</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>除了 Observable 来源变了，其他与本文最早讲的 RxJava 没什么不同。非要说不同，有一点，多了一句<code>subscribeOn(Schedulers.newThread())</code>，下面讲讲这个。</p>
+<h3 id="4-3-线程切换"><a href="#4-3-线程切换" class="headerlink" title="4.3 线程切换"></a>4.3 线程切换</h3><ul>
+<li><code>subscribeOn</code>：定义 Observable 发射事件所处的线程</li>
+<li><code>observeOn</code>：定义转换/响应事件所处的线程（map、flatMap、Observer 等），可多次切换    </li>
+</ul>
+<p>线程切换比较常见，比如 子线程请求网络数据主线程更新 UI，<code>subscribeOn</code>和<code>observeOn</code>有哪些线程可以选择？它们又是怎样使用的？我们先看一个例子：  </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">Thread(<span class="keyword">object</span> : Runnable &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">                Log.e(<span class="string">"abc"</span>,<span class="string">"Thread当前线程：<span class="subst">$&#123;Thread.currentThread().name&#125;</span>"</span>)</span><br><span class="line">                observable.subscribeOn(Schedulers.newThread())</span><br><span class="line">                        .doOnNext(<span class="keyword">object</span> :Consumer&lt;ZhEntity&gt;&#123;</span><br><span class="line">                            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">accept</span><span class="params">(t: <span class="type">ZhEntity</span>?)</span></span> &#123;</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>,<span class="string">"doOnNext当前线程：<span class="subst">$&#123;Thread.currentThread().name&#125;</span>"</span>)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;)</span><br><span class="line">                        .observeOn(Schedulers.io())</span><br><span class="line">                        .flatMap(<span class="keyword">object</span> :Function&lt;ZhEntity,ObservableSource&lt;ZhEntity.StoriesBean&gt;&gt;&#123;</span><br><span class="line">                            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">apply</span><span class="params">(t: <span class="type">ZhEntity</span>)</span></span>: ObservableSource&lt;ZhEntity.StoriesBean&gt; &#123;</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>,<span class="string">"flatMap当前线程：<span class="subst">$&#123;Thread.currentThread().name&#125;</span>"</span>)</span><br><span class="line">                                <span class="keyword">return</span> Observable.fromIterable(t.stories)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;)</span><br><span class="line">                        .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                        .subscribe(<span class="keyword">object</span> : Observer&lt;ZhEntity.StoriesBean&gt; &#123;</span><br><span class="line">                            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSubscribe</span><span class="params">(d: <span class="type">Disposable</span>)</span></span> &#123;</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>,<span class="string">"onSubscribe当前线程：<span class="subst">$&#123;Thread.currentThread().name&#125;</span>"</span>)</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNext</span><span class="params">(t: <span class="type">ZhEntity</span>.<span class="type">StoriesBean</span>)</span></span> &#123;</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>,<span class="string">"Observer当前线程：<span class="subst">$&#123;Thread.currentThread().name&#125;</span>"</span>)</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>, <span class="string">"--&gt;<span class="subst">$&#123;Gson().toJson(t)&#125;</span>"</span>)</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onError</span><span class="params">(e: <span class="type">Throwable</span>)</span></span> &#123;</span><br><span class="line">                                Log.e(<span class="string">"abc"</span>, <span class="string">"--&gt;<span class="variable">$e</span>"</span>)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start()</span><br><span class="line"><span class="comment">// log 打印</span></span><br><span class="line">Thread当前线程：Thread-<span class="number">4</span></span><br><span class="line">onSubscribe当前线程：Thread-<span class="number">4</span></span><br><span class="line">doOnNext当前线程：RxNewThreadScheduler-<span class="number">1</span></span><br><span class="line">flatMap当前线程：RxCachedThreadScheduler-<span class="number">1</span></span><br><span class="line">Observer当前线程：main</span><br><span class="line">Observer当前线程：main</span><br><span class="line">Observer当前线程：main</span><br></pre></td></tr></table></figure>
+
+<p>这里面只有<code>doOnNext</code>没讲过，现在说说：每发送 onNext() 之前都会先回调这个方法，所以 doOnNext 和 Observable 的 subscribe（发射事件的方法）处于同一个线程。<br>从这个例子可以看出： </p>
+<blockquote>
+<ol>
+<li>Observable 和 Observer 建立订阅关系是在当前线程中（Thread-4）</li>
+<li><code>subscribeOn</code>决定 Observable 发射事件所处的线程（即 Retrofit 请求网络所在线程）</li>
+<li>第一次<code>observeOn</code>决定 flatMap 所在的线程（RxCachedThreadScheduler-1）</li>
+<li>再次<code>observeOn</code>决定 Observer 所在线程（Android 主线程 main）  </li>
+</ol>
+</blockquote>
+<p>所以每次调用<code>observeOn</code>就会切换线程，并且决定的是接下来的变换/响应的线程。多说一句，<strong>多次设置 subscribeOn，只有第一次生效</strong>。  </p>
+<p><strong>线程可选值</strong>：<br>| 线 程 名 称 | 说明 |<br>| ———- | ———- |<br>| Schedulers.immediate() | 默认的 Scheduler,直接在当前线程运行，相当于不指定线程 |<br>| Schedulers.newThread() | 启用新线程，并在新线程执行操作<br>Schedulers.io() |  I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler。行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程 |<br>| Schedulers.computation() | 计算所使用的 Scheduler。这个计算指的是 CPU 密集型计算，即不会被 I/O 等操作限制性能的操作，例如图形的计算。这个 Scheduler 使用的固定的线程池，大小为 CPU 核数。不要把 I/O 操作放在 computation() 中，否则 I/O 操作的等待时间会浪费 CPU |<br>| AndroidSchedulers.mainThread() |  Android 主线程 |</p>
+<h3 id="4-4-Disposable-和-CompositeDisposable"><a href="#4-4-Disposable-和-CompositeDisposable" class="headerlink" title="4.4 Disposable 和 CompositeDisposable"></a>4.4 Disposable 和 CompositeDisposable</h3><p>最后介绍一下这两个类，<code>Disposable</code>前文出现过，在 Observer 的 onSubscribe 函数中，有一个 Disposable 类型的参数：<code>override fun onSubscribe(d: Disposable) {}</code>，通过前面介绍我们知道，Observable 和 Observer 建立订阅关系时会调用 onSubscribe 方法，但是没有说这个参数的作用。  </p>
+<h4 id="4-4-1-DisPosable"><a href="#4-4-1-DisPosable" class="headerlink" title="4.4.1 DisPosable"></a>4.4.1 DisPosable</h4><p>Disposable 的 dispose() 函数可以用来解除订阅，这样就不会收到 Observable 发射的事件：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dis ?= <span class="literal">null</span></span><br><span class="line"><span class="keyword">val</span> observable = Observable.fromIterable(mutableListOf(<span class="string">"Hello"</span>, <span class="string">"RxJava"</span>, <span class="string">"GoodBye"</span>))</span><br><span class="line">        <span class="keyword">val</span> observer = <span class="keyword">object</span> : Observer&lt;String&gt; &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSubscribe</span><span class="params">(d: <span class="type">Disposable</span>)</span></span> &#123;</span><br><span class="line">                dis=d</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onSubscribe-----<span class="variable">$d</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNext</span><span class="params">(t: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (t==<span class="string">"Hello"</span>) dis.dispose()</span><br><span class="line">                Log.e(<span class="string">"abc"</span>, <span class="string">"-----onNext-----<span class="variable">$t</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onError</span><span class="params">(e: <span class="type">Throwable</span>)</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">observable.subscribe(observer)</span><br><span class="line"><span class="comment">// log 打印</span></span><br><span class="line">-----onNext-----Hello</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，调用<code>dis.dispose()</code>后，就不在打印上游发射的”RxJava”和”GoodBye”了。</p>
+<h4 id="4-4-2-CompositeDisposable"><a href="#4-4-2-CompositeDisposable" class="headerlink" title="4.4.2 CompositeDisposable"></a>4.4.2 CompositeDisposable</h4><p>CompositeDisposable 可以用来管理多个 Disposable，通过<code>add()</code>方法添加 Disposable 对象，然后在 onDestroy 方法里面调用<code>clear()</code>或者<code>dispose()</code>来清除所有的 Disposable，这样可以防止内存泄漏。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> cDis = CompositeDisposable()</span><br><span class="line"><span class="comment">// ...代码省略</span></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSubscribe</span><span class="params">(d: <span class="type">Disposable</span>)</span></span> &#123;</span><br><span class="line">                cDis.add(d)</span><br><span class="line">            &#125;</span><br><span class="line"><span class="comment">// ...代码省略</span></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">        cDis.clear()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>多说一句，通过查看<code>RxJava2CallAdapterFactory.create()</code>源码可知，<code>dispose()</code>方法能主动断开 Observable 和 Observer 之间的连接，还能取消 Retrofit 的网络请求，所以放心的用吧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rxjava/" rel="tag"># rxjava</a>
+          
+            <a href="/tags/retrofit/" rel="tag"># retrofit</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/前端和小程序/mpvue01/" rel="next" title="mpvue + Vant Weapp 开发小程序之 van-checkbox 和 van-checkbox-group">
+                <i class="fa fa-chevron-left"></i> mpvue + Vant Weapp 开发小程序之 van-checkbox 和 van-checkbox-group
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="坤哥">
+            
+              <p class="site-author-name" itemprop="name">坤哥</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-观察者模式"><span class="nav-number">1.</span> <span class="nav-text">1. 观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-RxJava-中的观察者模式"><span class="nav-number">2.</span> <span class="nav-text">2. RxJava 中的观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-创建-Observable"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 创建 Observable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-create"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 create()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-just"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 just</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-fromIterable"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 fromIterable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-创建-Observer"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 创建 Observer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Consumer-和-Action"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Consumer 和 Action</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-subscribe-Consumer-lt-super-T-gt-onNext"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 subscribe(Consumer&lt;? super T&gt; onNext)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError-Action-onComplete"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError,Action onComplete)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-4-subscribe-Consumer-lt-super-T-gt-onNext-Consumer-lt-super-Throwable-gt-onError-Action-onComplete-Consumer-lt-super-Disposable-gt-onSubscribe"><span class="nav-number">2.3.4.</span> <span class="nav-text">2.3.4 subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError,Action onComplete, Consumer&lt;? super Disposable&gt; onSubscribe)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-变换"><span class="nav-number">3.</span> <span class="nav-text">3. 变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-map"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-flatMap"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 flatMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-filter"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 filter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-结合-Retrofit-使用"><span class="nav-number">4.</span> <span class="nav-text">4. 结合 Retrofit 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Retrofit-进行简单的-Get-请求"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Retrofit 进行简单的 Get 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Retrofit-结合-RxJava"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Retrofit 结合 RxJava</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-线程切换"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 线程切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Disposable-和-CompositeDisposable"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 Disposable 和 CompositeDisposable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-1-DisPosable"><span class="nav-number">4.4.1.</span> <span class="nav-text">4.4.1 DisPosable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-2-CompositeDisposable"><span class="nav-number">4.4.2.</span> <span class="nav-text">4.4.2 CompositeDisposable</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">坤哥</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    <span class="site-pv">
+      <i class="fa fa-pencil"></i>
+      博客全站共： <span class="post-count">15.1k</span> 字
+    </span>
+</div>
+<!-- 新增访客统计代码 END-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+					
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://刘二瓜.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/Android/retrofitandrxjava/';
+          this.page.identifier = 'Android/retrofitandrxjava/';
+          this.page.title = 'Rxjava2 和 Retrofit2 结合使用详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://刘二瓜.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'TGRTgKyCHRnM85FzEIBodDh7-gzGzoHsz',
+        appKey: 'KD0Ed9zNNRrOQUiVMmaHkmEO',
+        placeholder: 'ヾﾉ≧∀≦)o来啊, 快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("TGRTgKyCHRnM85FzEIBodDh7-gzGzoHsz", "KD0Ed9zNNRrOQUiVMmaHkmEO");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
